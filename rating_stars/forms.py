@@ -53,8 +53,13 @@ class UpdateRatingForm(forms.Form):
             )
 
         user = User.objects.get(id=user_id)
-        if Rating.objects.filter(user=user).exists():
+        if Rating.objects.filter(
+            user=user,
+            content_type=ctype,
+            object_id=obj_id
+        ).exists():
             raise forms.ValidationError(
                 message=_("You've already voted")
             )
         return cleaned_data
+
