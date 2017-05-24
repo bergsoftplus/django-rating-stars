@@ -1,1 +1,1 @@
-# django-rating-starts
+# django-rating-stars
