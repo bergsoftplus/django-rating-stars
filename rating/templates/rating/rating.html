@@ -1,0 +1,40 @@
+{% load rating_tags i18n %}
+
+  <form action="{% url 'update_rating' %}" id="js-rating-form" method="post">
+    {% csrf_token %}
+    <div class="js-star-rating star-rating" data-init='{{ vote_average|floatformat:"0" }}'></div>
+    <label>
+      <input class="form-control" value='{{ object.id }}'
+              id="id_object_id" name="object_id" type="hidden">
+    </label>
+
+    <label>
+      <input class="form-control" value='{{ object|content_type }}'
+              id="id_content_type" name="content_type" type="hidden">
+    </label>
+
+    <label>
+      <input class="form-control" value=''
+              id="id_rating" name="rating" type="hidden">
+    </label>
+
+    <label>
+      <input class="form-control" value='{% if vote_user_id %}{{ vote_user_id }}{% endif %}'
+              id="id_user_id" name="user_id" type="hidden">
+    </label>
+
+    {{ form.non_field_errors }}
+
+    {% if not vote_amount %}
+      <p class='margTop20'>
+        {% trans 'Nobody voted yet' %}
+      </p>
+    {% else %}
+      <p class='margTop20'>
+        {% blocktrans %}Voted: {{ vote_amount }} times{% endblocktrans %}
+      </p>
+      <p>
+        {% trans 'Average mark' %}: {{ vote_average|floatformat:"1" }}
+      </p>
+    {% endif %}
+  </form>
