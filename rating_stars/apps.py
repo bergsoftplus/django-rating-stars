@@ -4,4 +4,4 @@ from django.apps import AppConfig
 
 
 class RatingConfig(AppConfig):
-    name = 'rating'
+    name = 'rating_stars'

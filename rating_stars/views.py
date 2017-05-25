@@ -12,7 +12,7 @@ from .models import Rating
 class UpdateRatingView(CreateView):
     model = Rating
     form_class = UpdateRatingForm
-    template_name = 'rating/rating.html'
+    template_name = 'rating_stars/rating.html'
 
     def get_form_kwargs(self):
         kwargs = {
@@ -35,7 +35,7 @@ class UpdateRatingView(CreateView):
         if not Rating.objects.filter(content_type=ctype, object_id=obj_id).exists():
             data = {
                 'html': render_to_string(
-                    'rating/rating.html',
+                    'rating_stars/rating.html',
                     {
                         'form': form,
                         'object': ctype.model_class().objects.get(id=obj_id),
@@ -53,7 +53,7 @@ class UpdateRatingView(CreateView):
             if self.request.is_ajax():
                 data = {
                     'html': render_to_string(
-                        'rating/rating.html',
+                        'rating_stars/rating.html',
                         {
                             'form': form,
                             'object': ctype.model_class().objects.get(id=obj_id),
@@ -87,7 +87,7 @@ class UpdateRatingView(CreateView):
         if self.request.is_ajax():
             data = {
                 'html': render_to_string(
-                    'rating/rating.html',
+                    'rating_stars/rating.html',
                     {
                         'form': form,
                         'object': ctype.model_class().objects.get(id=obj_id),

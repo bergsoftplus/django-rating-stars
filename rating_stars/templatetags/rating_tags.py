@@ -2,14 +2,14 @@
 from django import template
 from django.contrib.contenttypes.models import ContentType
 
-from rating.forms import UpdateRatingForm
-from rating.models import Rating
+from rating_stars.forms import UpdateRatingForm
+from rating_stars.models import Rating
 
 register = template.Library()
 
 
 @register.inclusion_tag(
-    'rating/rating_wrapper.html',
+    'rating_stars/rating_wrapper.html',
     takes_context=True
 )
 def get_rating(context, obj):

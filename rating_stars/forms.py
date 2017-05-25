@@ -62,4 +62,3 @@ class UpdateRatingForm(forms.Form):
                 message=_("You've already voted")
             )
         return cleaned_data
-
