@@ -183,7 +183,9 @@ function initStarRating() {
 };
 
 $(document).ready(function() {
-      initStarRating();
+  if ($('.js-star-rating').length) {
+    initStarRating();
+  }
 });
 
 $('body').on('submit', '#js-rating-form', function(event) {
