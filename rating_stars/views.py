@@ -32,6 +32,11 @@ class UpdateRatingView(CreateView):
         obj_id = form.cleaned_data['object_id']
         user_id = form.cleaned_data['user_id']
 
+        disabled = False
+        if self.request.user.is_authenticated():
+            if Rating.objects.filter(user=self.request.user, object_id=obj_id).exists():
+                disabled = True
+
         if not Rating.objects.filter(content_type=ctype, object_id=obj_id).exists():
             data = {
                 'html': render_to_string(
@@ -41,7 +46,8 @@ class UpdateRatingView(CreateView):
                         'object': ctype.model_class().objects.get(id=obj_id),
                         'vote_user_id': user_id,
                         'vote_amount': 0,
-                        'vote_average': 0
+                        'vote_average': 0,
+                        'disabled': disabled
                     },
                     request=self.request
                 )
@@ -59,7 +65,8 @@ class UpdateRatingView(CreateView):
                             'object': ctype.model_class().objects.get(id=obj_id),
                             'vote_user_id': user_id,
                             'vote_amount': self.object.votes,
-                            'vote_average': self.object.average
+                            'vote_average': self.object.average,
+                            'disabled': disabled
                         },
                         request=self.request
                     )
@@ -93,7 +100,8 @@ class UpdateRatingView(CreateView):
                         'object': ctype.model_class().objects.get(id=obj_id),
                         'vote_user_id': user_id,
                         'vote_amount': self.object.votes,
-                        'vote_average': self.object.average
+                        'vote_average': self.object.average,
+                        'disabled': True
                     },
                     request=self.request
                 )

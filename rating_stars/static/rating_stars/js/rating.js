@@ -81,11 +81,13 @@
     function starMouseOver(star) {
       star.addEventListener('mouseover', function(e) {
         iterate(stars, function(item, index) {
-          if (index <= parseInt(star.getAttribute('data-index'))) {
-            item.classList.add('is-active');
-          } else {
-            item.classList.remove('is-active');
-          }
+          if (!$(el).hasClass("disabled")) {
+            if (index <= parseInt(star.getAttribute('data-index'))) {
+              item.classList.add('is-active');
+            } else {
+              item.classList.remove('is-active');
+            }
+          };
         });
       });
     }
@@ -133,11 +135,13 @@
       currentRating = value || currentRating;
 
       iterate(stars, function(star, index) {
-        if (index < currentRating) {
-          star.classList.add('is-active');
-        } else {
-          star.classList.remove('is-active');
-        }
+        if (!$(el).hasClass("disabled")) {
+          if (index < currentRating) {
+            star.classList.add('is-active');
+          } else {
+            star.classList.remove('is-active');
+          }
+        };
       });
 
       if (callback && doCallback) { callback(getRating()); }

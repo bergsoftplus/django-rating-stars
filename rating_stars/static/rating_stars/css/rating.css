@@ -28,3 +28,11 @@
 .c-rating__item.is-active {
   background-position: -24px 0;
 }
+
+.disabled .c-rating__item:hover {
+  background-position: inherit;
+}
+
+.disabled .c-rating__item.is-active:hover {
+  background-position: -24px 0;
+}

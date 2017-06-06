@@ -36,6 +36,12 @@ def get_rating(context, obj):
             ctx['vote_user_id'] = request.user.id
         else:
             ctx['vote_user_id'] = None
+
+    if request.user.is_authenticated():
+        if Rating.objects.filter(user=request.user, object_id=obj.id).exists():
+            ctx['disabled'] = True
+        else:
+            ctx['disabled'] = False
     return ctx
 
 
